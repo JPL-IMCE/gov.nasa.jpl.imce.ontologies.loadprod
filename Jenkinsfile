@@ -19,7 +19,9 @@ pipeline {
 
 	stage('Build Loaded Production Image') {
 		steps {
-		sh returnStdout: true, script: 'sudo docker build -t jplimce/gov.nasa.jpl.imce.ontologies.loadprod .'
+			timeout(time: 30, unit: 'MINUTES') {
+				sh returnStdout: true, script: 'sudo docker build -t jplimce/gov.nasa.jpl.imce.ontologies.loadprod .'
+            }
 		}
 	}
 
