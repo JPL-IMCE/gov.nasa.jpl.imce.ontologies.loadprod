@@ -9,11 +9,12 @@ pipeline {
 		}
 	}	
 
-	stage('Get Ontologies') {
+	stage('Checkout Ontologies') {
 		steps {
 			dir('gov.nasa.jpl.imce.ontologies.public') {
         		git url: 'https://github.com/JPL-IMCE/gov.nasa.jpl.imce.ontologies.public.git'
     		}	
+			checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'ontologies']], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/JPL-IMCE/gov.nasa.jpl.imce.ontologies.fuseki']]])
 	 	}
 	}
 
